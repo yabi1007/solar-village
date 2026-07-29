@@ -3,12 +3,72 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>햇빛소득마을 이장메이커</title>
-<link rel="stylesheet" href="style.css">
+
+<style>
+html, body {
+    margin: 0;
+    padding: 0;
+    background: #222;
+    height: 100%;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* 원본 이미지 비율 유지 */
+.game {
+    position: relative;
+    width: 100%;
+    max-width: 360px;
+}
+
+.game img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+/* 투명 클릭 영역 */
+.hotspot {
+    position: absolute;
+    cursor: pointer;
+}
+
+/* 새로운 이장 되기 */
+.start {
+    left: 12.5%;
+    top: 73.2427%;
+    width: 73.6%;
+    height: 6.04%;
+}
+
+/* 게임 방법 */
+.howto {
+    left: 12.2222%;
+    top: 81.338%;
+    width: 74.4%;
+    height: 5.91%;
+}
+
+</style>
 </head>
+
 <body>
-<h1>햇빛소득마을 이장메이커</h1>
-<p>청년 이장이 되어 마을을 성장시키는 교육용 웹게임</p>
-<script src="game.js"></script>
+
+<div class="game">
+
+    <img src="assets/images/title/title_background.png" alt="햇빛소득마을 이장메이커">
+
+    <a class="hotspot start" href="village.html"></a>
+
+    <a class="hotspot howto" href="howto.html"></a>
+
+</div>
+
 </body>
 </html>
