@@ -3,58 +3,101 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>햇빛소득마을 이장메이커</title>
-
 <style>
 html, body {
-    margin: 0;
-    padding: 0;
-    background: #222;
-    height: 100%;
+    margin:0;
+    padding:0;
+    background:#222;
+    height:100%;
 }
 
 body {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    display:flex;
+    justify-content:center;
+    align-items:center;
 }
 
-/* 원본 이미지 비율 유지 */
 .game {
-    position: relative;
-    width: 100%;
-    max-width: 360px;
+    width:100%;
+    max-width:360px;
+    aspect-ratio:853 / 1844;
+    position:relative;
+    overflow:hidden;
 }
 
-.game img {
-    width: 100%;
-    height: auto;
-    display: block;
+/* 모든 화면 공통 */
+.screen {
+    position:absolute;
+    width:100%;
+    height:100%;
+    left:0;
+    top:0;
+    display:none;
 }
 
-/* 투명 클릭 영역 */
+/* 시작 화면 */
+#title-screen {
+    display:block;
+}
+
+#title-screen img {
+    width:100%;
+    height:auto;
+    display:block;
+}
+
+/* 버튼 좌표 */
 .hotspot {
-    position: absolute;
-    cursor: pointer;
+    position:absolute;
+    cursor:pointer;
 }
 
-/* 새로운 이장 되기 */
 .start {
-    left: 12.5%;
-    top: 73.2427%;
-    width: 73.6%;
-    height: 6.04%;
+    left:12.5%;
+    top:73.2427%;
+    width:73.6%;
+    height:6.04%;
 }
 
-/* 게임 방법 */
 .howto {
-    left: 12.2222%;
-    top: 81.338%;
-    width: 74.4%;
-    height: 5.91%;
+    left:12.2222%;
+    top:81.338%;
+    width:74.4%;
+    height:5.91%;
 }
 
+/* 캐릭터 생성 */
+#character-screen {
+    background:#f8f3df;
+    padding:40px 25px;
+    box-sizing:border-box;
+    text-align:center;
+}
+
+#character-screen h2 {
+    margin-top:50px;
+}
+
+#character-screen input {
+    width:100%;
+    height:45px;
+    margin:10px 0;
+    font-size:18px;
+}
+
+#character-screen button {
+    width:100%;
+    height:50px;
+    margin-top:30px;
+}
+
+/* 마을 화면 */
+#village-screen {
+    background:#dff3d8;
+    padding:40px 20px;
+    text-align:center;
+}
 </style>
 </head>
 
@@ -62,13 +105,49 @@ body {
 
 <div class="game">
 
-    <img src="assets/images/title/title_background.png" alt="햇빛소득마을 이장메이커">
+    <!-- 타이틀 -->
+    <div id="title-screen" class="screen">
+        <img src="assets/images/title/title_background.png">
 
-    <a class="hotspot start" href="village.html"></a>
+        <a class="hotspot start" onclick="showScreen('character-screen')"></a>
+        <a class="hotspot howto" onclick="showScreen('howto-screen')"></a>
+    </div>
 
-    <a class="hotspot howto" href="howto.html"></a>
+
+    <!-- 캐릭터 생성 -->
+    <div id="character-screen" class="screen">
+
+        <h2>새로운 이장님</h2>
+
+        <p>이장 이름과 마을 이름을 정해주세요</p>
+
+        <input id="player-name" placeholder="이장 이름">
+
+        <input id="village-name" placeholder="마을 이름">
+
+        <button onclick="createVillage()">
+            마을 시작하기
+        </button>
+
+    </div>
+
+
+    <!-- 게임 방법 -->
+    <div id="howto-screen" class="screen">
+        <h2>게임 방법</h2>
+        <p>준비중입니다.</p>
+    </div>
+
+
+    <!-- 마을 -->
+    <div id="village-screen" class="screen">
+        <h2>마을 화면</h2>
+        <p id="welcome"></p>
+    </div>
 
 </div>
+
+<script src="game.js"></script>
 
 </body>
 </html>
