@@ -121,6 +121,36 @@ body{
     background:transparent;
     border:none;
 }
+
+#prologue-screen img{
+    width:360px;
+    height:778px;
+    object-fit:fill;
+}
+
+.dialogue{
+    position:absolute;
+    left:8%;
+    top:60%;
+    width:84%;
+    height:22%;
+    font-size:14px;
+    line-height:1.7;
+    color:#5b4630;
+    white-space:pre-line;
+}
+
+.next-button{
+    position:absolute;
+    left:10%;
+    top:92%;
+    width:80%;
+    height:6%;
+    background:transparent;
+    border:none;
+    cursor:pointer;
+}
+
 </style>
 </head>
 
@@ -161,12 +191,22 @@ placeholder="최대 7자까지 입력">
 </div>
 
 
+
+<div id="prologue-screen" class="screen">
+<img id="prologue-image" src="assets/images/prologue/scene01.png">
+
+<div id="dialogue" class="dialogue"></div>
+
+<button id="next-button" class="next-button"></button>
+</div>
+
 <div id="village-screen" class="screen">
 <h2 id="welcome"></h2>
 </div>
 
 </div>
 
+<script src="prologue.js"></script>
 <script src="game.js"></script>
 
 </body>

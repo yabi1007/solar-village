@@ -76,7 +76,8 @@ gameData.village.name=village;
 
 
 
-showScreen("village-screen");
+showScreen("prologue-screen");
+startPrologue();
 
 
 document.getElementById("welcome").innerHTML=
@@ -91,3 +92,85 @@ JSON.stringify(gameData)
 );
 
 }
+
+
+let prologueIndex = 0;
+let typingTimer = null;
+let isTyping = false;
+let fullText = "";
+
+function startPrologue(){
+    prologueIndex = 0;
+    showPrologue();
+}
+
+function showPrologue(){
+
+    const scene = prologueData[prologueIndex];
+
+    document.getElementById("prologue-image").src = scene.image;
+
+    let text = scene.text
+        .replaceAll("[마을이름]", gameData.village.name)
+        .replaceAll("[이장이름]", gameData.player.name);
+
+    typeText(text);
+}
+
+
+function typeText(text){
+
+    clearInterval(typingTimer);
+
+    fullText = text;
+    let index = 0;
+
+    const box = document.getElementById("dialogue");
+
+    box.innerText = "";
+    isTyping = true;
+
+    typingTimer = setInterval(()=>{
+
+        box.innerText += fullText[index];
+        index++;
+
+        if(index >= fullText.length){
+            clearInterval(typingTimer);
+            isTyping = false;
+        }
+
+    },50);
+}
+
+
+document.addEventListener("DOMContentLoaded",()=>{
+
+const next = document.getElementById("next-button");
+
+if(next){
+
+next.onclick=function(){
+
+    if(isTyping){
+
+        clearInterval(typingTimer);
+        document.getElementById("dialogue").innerText = fullText;
+        isTyping=false;
+        return;
+
+    }
+
+    prologueIndex++;
+
+    if(prologueIndex < prologueData.length){
+        showPrologue();
+    }else{
+        showScreen("village-screen");
+    }
+
+};
+
+}
+
+});
