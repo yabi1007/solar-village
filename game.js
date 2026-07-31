@@ -132,7 +132,7 @@ function typeText(text){
 
     typingTimer = setInterval(()=>{
 
-        box.innerText += fullText[index];
+        box.textContent += fullText[index];
         index++;
 
         if(index >= fullText.length){
@@ -155,7 +155,7 @@ next.onclick=function(){
     if(isTyping){
 
         clearInterval(typingTimer);
-        document.getElementById("dialogue").innerText = fullText;
+        document.getElementById("dialogue").textContent = fullText;
         isTyping=false;
         return;
 
