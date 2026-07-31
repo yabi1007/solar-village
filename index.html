@@ -4,99 +4,122 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>햇빛소득마을 이장메이커</title>
+
 <style>
-html, body {
+html,body{
     margin:0;
     padding:0;
     background:#222;
     height:100%;
 }
 
-body {
+body{
     display:flex;
     justify-content:center;
     align-items:center;
 }
 
-.game {
-    width:100%;
-    max-width:360px;
-    aspect-ratio:853 / 1844;
+.game{
+    width:360px;
+    height:778px;
     position:relative;
     overflow:hidden;
 }
 
-/* 모든 화면 공통 */
-.screen {
+.screen{
     position:absolute;
     width:100%;
     height:100%;
-    left:0;
-    top:0;
     display:none;
 }
 
-/* 시작 화면 */
-#title-screen {
+#title-screen{
     display:block;
 }
 
-#title-screen img {
-    width:100%;
-    height:auto;
-    display:block;
+#title-screen img,
+#character-screen img{
+    width:360px;
+    height:778px;
+    object-fit:fill;
 }
 
-/* 버튼 좌표 */
-.hotspot {
+.hotspot{
     position:absolute;
     cursor:pointer;
 }
 
-.start {
+.start-title{
     left:12.5%;
     top:73.2427%;
     width:73.6%;
     height:6.04%;
 }
 
-.howto {
-    left:12.2222%;
-    top:81.338%;
-    width:74.4%;
-    height:5.91%;
+.gender{
+    position:absolute;
+    cursor:pointer;
 }
 
-/* 캐릭터 생성 */
-#character-screen {
-    background:#f8f3df;
-    padding:40px 25px;
+.male{
+    left:18%;
+    top:52.38%;
+    width:28.89%;
+    height:13.59%;
+}
+
+.female{
+    left:52.5%;
+    top:52.38%;
+    width:30.56%;
+    height:14.1%;
+}
+
+.gender.selected{
+    border:3px solid #f5c542;
+    border-radius:15px;
     box-sizing:border-box;
+}
+
+.input-box{
+    position:absolute;
+    border:none;
+    background:transparent;
     text-align:center;
+    outline:none;
+    padding:0;
+    font-size:14px;
+    color:#5b4630;
 }
 
-#character-screen h2 {
-    margin-top:50px;
+.input-box::placeholder{
+    color:#c9bfa8;
+    font-size:14px;
 }
 
-#character-screen input {
-    width:100%;
-    height:45px;
-    margin:10px 0;
-    font-size:18px;
+.name-input{
+    left:23.5%;
+    top:75.5%;
+    width:60.28%;
+    height:3.32%;
 }
 
-#character-screen button {
-    width:100%;
-    height:50px;
-    margin-top:30px;
+.village-input{
+    left:24%;
+    top:85.00%;
+    width:58.89%;
+    height:3.33%;
 }
 
-/* 마을 화면 */
-#village-screen {
-    background:#dff3d8;
-    padding:40px 20px;
-    text-align:center;
+.create-button{
+    position:absolute;
+    left:15.55%;
+    top:89.26%;
+    width:68.89%;
+    height:5.84%;
+    cursor:pointer;
+    background:transparent;
+    border:none;
 }
 </style>
 </head>
@@ -105,45 +128,42 @@ body {
 
 <div class="game">
 
-    <!-- 타이틀 -->
-    <div id="title-screen" class="screen">
-        <img src="assets/images/title/title_background.png">
-
-        <a class="hotspot start" onclick="showScreen('character-screen')"></a>
-        <a class="hotspot howto" onclick="showScreen('howto-screen')"></a>
-    </div>
+<div id="title-screen" class="screen">
+<img src="assets/images/title/title_background.png">
+<div class="hotspot start-title" onclick="showScreen('character-screen')"></div>
+</div>
 
 
-    <!-- 캐릭터 생성 -->
-    <div id="character-screen" class="screen">
+<div id="character-screen" class="screen">
 
-        <h2>새로운 이장님</h2>
+<img src="assets/images/character/character_create_background.png">
 
-        <p>이장 이름과 마을 이름을 정해주세요</p>
-
-        <input id="player-name" placeholder="이장 이름">
-
-        <input id="village-name" placeholder="마을 이름">
-
-        <button onclick="createVillage()">
-            마을 시작하기
-        </button>
-
-    </div>
+<div id="male" class="gender male" onclick="selectGender('male')"></div>
+<div id="female" class="gender female" onclick="selectGender('female')"></div>
 
 
-    <!-- 게임 방법 -->
-    <div id="howto-screen" class="screen">
-        <h2>게임 방법</h2>
-        <p>준비중입니다.</p>
-    </div>
+<input
+id="player-name"
+class="input-box name-input"
+maxlength="5"
+placeholder="최대 5자까지 입력">
 
 
-    <!-- 마을 -->
-    <div id="village-screen" class="screen">
-        <h2>마을 화면</h2>
-        <p id="welcome"></p>
-    </div>
+<input
+id="village-name"
+class="input-box village-input"
+maxlength="7"
+placeholder="최대 7자까지 입력">
+
+
+<button class="create-button" onclick="createVillage()"></button>
+
+</div>
+
+
+<div id="village-screen" class="screen">
+<h2 id="welcome"></h2>
+</div>
 
 </div>
 
