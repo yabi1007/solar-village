@@ -1,52 +1,93 @@
 const gameData = {
-    player:{
-        name:"",
-        gender:null
-    },
 
-    village:{
-        name:"",
-        population:50,
-        money:1000,
-        energy:0
-    }
+player:{
+    name:"",
+    gender:null
+},
+
+village:{
+    name:""
+}
+
 };
 
 
-function showScreen(screenId){
 
-    document.querySelectorAll(".screen")
-    .forEach(screen=>{
-        screen.style.display="none";
-    });
+function showScreen(id){
 
-    document.getElementById(screenId).style.display="block";
+document.querySelectorAll(".screen")
+.forEach(screen=>{
+    screen.style.display="none";
+});
+
+
+document.getElementById(id).style.display="block";
+
 }
+
+
+
+function selectGender(gender){
+
+gameData.player.gender = gender;
+
+
+document.querySelectorAll(".gender")
+.forEach(el=>{
+    el.classList.remove("selected");
+});
+
+
+document.getElementById(gender)
+.classList.add("selected");
+
+}
+
 
 
 function createVillage(){
 
-    const playerName =
-    document.getElementById("player-name").value;
-
-    const villageName =
-    document.getElementById("village-name").value;
+const name =
+document.getElementById("player-name").value;
 
 
-    if(!playerName || !villageName){
-        alert("이장 이름과 마을 이름을 입력해주세요.");
-        return;
-    }
+const village =
+document.getElementById("village-name").value;
 
 
-    gameData.player.name = playerName;
-    gameData.village.name = villageName;
+if(!gameData.player.gender){
+
+alert("성별을 선택해주세요.");
+return;
+
+}
 
 
-    showScreen("village-screen");
+if(!name || !village){
+
+alert("이장 이름과 마을 이름을 입력해주세요.");
+return;
+
+}
 
 
-    document.getElementById("welcome").innerHTML =
-    `${villageName}의 첫 이장 ${playerName}님<br>
-    마을의 새로운 시작입니다.`;
+gameData.player.name=name;
+gameData.village.name=village;
+
+
+
+showScreen("village-screen");
+
+
+document.getElementById("welcome").innerHTML=
+
+`${village}의 첫 이장<br>${name}님 환영합니다.`;
+
+
+
+localStorage.setItem(
+"solarVillageSave",
+JSON.stringify(gameData)
+);
+
 }
